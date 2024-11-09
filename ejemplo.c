@@ -3,8 +3,8 @@
 #include "gc.h"
 
 void display(){
-  int* ptr;
-  memoryAlloc((void**)&ptr, sizeof(int));
+  int** ptr;
+  memoryAlloc((void**)&ptr, sizeof(int*));
   countMemoryEntries();
   unregisterPointer((void**)&ptr);
   garbageCollector();
