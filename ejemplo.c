@@ -3,7 +3,10 @@
 #include "gc.h"
 
 void display(){
-  char** blackSquare = reverse(whiteSquare);
-  interpreter(blackSquare);
+  int* ptr;
+  memoryAlloc((void**)&ptr, sizeof(int));
+  countMemoryEntries();
+  unregisterPointer((void**)&ptr);
   garbageCollector();
+  countMemoryEntries();
 }
