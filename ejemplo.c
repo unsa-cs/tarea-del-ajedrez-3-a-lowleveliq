@@ -10,5 +10,4 @@ void display(){
   fprintf(stderr, "Dirección: %p\n", &blackSquare);
   interpreter(blackSquare);
   garbageCollector();
-  fprintf(stderr, "memoryList = %p\n", memoryList);
 }
