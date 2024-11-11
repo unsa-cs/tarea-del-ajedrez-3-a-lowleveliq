@@ -6,6 +6,8 @@
 
 char** allocateMemory(int rows, size_t cols){
   char** newFig;
+  // Estamos pasando la dirección de memoria de la variable con nombre newFig
+  // memoryAlloc guarda la memoria de aquel. 
   memoryAlloc((void**)&newFig, sizeof(char*)*(rows + 1));
   for(int i = 0; i < rows; i++)
     memoryAlloc((void**)&newFig[i], sizeof(char)*(cols + 1));
