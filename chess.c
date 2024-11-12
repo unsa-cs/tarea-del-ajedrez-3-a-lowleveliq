@@ -2,19 +2,13 @@
 #include <stdlib.h>
 #include "chess.h"
 #include "gc.h"
-#include <stdio.h>
 
-char** allocateMemory(int rows, size_t cols){
-  char** newFig;
+void allocateMemory(char** newFig, int rows, size_t cols){
   // Estamos pasando la dirección de memoria de la variable con nombre newFig
   // memoryAlloc guarda la memoria de aquel. 
   memoryAlloc((void**)&newFig, sizeof(char*)*(rows + 1));
   for(int i = 0; i < rows; i++)
     memoryAlloc((void**)&newFig[i], sizeof(char)*(cols + 1));
-  fprintf(stderr, "allocateMemory()\n");
-  fprintf(stderr, "Puntero: %p\n", newFig);
-  fprintf(stderr, "Dirección: %p\n", &newFig);
-  return newFig;
 }
 
 void unlinkMemory(char** fig){
@@ -24,9 +18,6 @@ void unlinkMemory(char** fig){
   countMemoryEntries();
   unregisterPointer((void**)&fig);
   countMemoryEntries();
-  fprintf(stderr, "unlinkMemory()\n");
-  fprintf(stderr, "Puntero: %p\n", fig);
-  fprintf(stderr, "Dirección: %p\n", &fig);
 }
 
 char** reverse(char** fig){
@@ -36,11 +27,8 @@ char** reverse(char** fig){
   int cols = 0;
   while(fig[0][++cols]);
 
-  char** newFig = allocateMemory(rows, cols);
-
-  fprintf(stderr, "reverse()\n");
-  fprintf(stderr, "Puntero: %p\n", newFig);
-  fprintf(stderr, "Dirección: %p\n", &newFig);
+  char** newFig;
+  allocateMemory(newFig, rows, cols);
 
   for(int i = 0; fig[i]; i++){
     for(int j = 0; fig[0][j]; j++)
