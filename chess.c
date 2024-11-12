@@ -9,12 +9,12 @@ void allocateMemory(char*** newFig, int rows, size_t cols){
     memoryAlloc((void**)(*newFig + i), sizeof(char)*(cols + 1));
 }
 
-void unlinkMemory(char** fig){
+void unlinkMemory(char*** fig){
   countMemoryEntries();
-  for(int i = 0; fig[i]; i++)
-    unregisterPointer((void**)&fig[i]);
+  for(int i = 0; (*fig)[i]; i++)
+    unregisterPointer((void**)(*fig + i));
   countMemoryEntries();
-  unregisterPointer((void**)&fig);
+  unregisterPointer((void**)fig);
   countMemoryEntries();
 }
 
@@ -34,7 +34,7 @@ char** reverse(char** fig){
     newFig[i][cols] = 0;
   }
   newFig[rows] = 0;
-  unlinkMemory(newFig);
+  unlinkMemory(&newFig);
   return newFig;
 }
 
