@@ -7,7 +7,7 @@ void display(){
   int *a;
   memoryAlloc((void **)&a, sizeof(int));
   int *b;
-  registerPointerToMemory((void **)&b, (void **)&a);
+  registerPointerToMemory((void **)&b, (void *)a);
   *b = 3;
   printf("a = %d\n", *a); // debe imprimir a = 3;
   unregisterPointer((void **)&a);
