@@ -50,10 +50,12 @@ void memoryAlloc(void** pointer, size_t size){
 }
 
 // Función para agregar un puntero adicional que apunte a la misma memoria
-void addPointer(void** new_pointer, void* existing_memory){
+void registerPointerToMemory(void** new_pointer, void* existing_memory){
   MemoryEntry* current = memoryList;
   while(current){
+    fprintf(stderr, "%p\n%p\n", current->memory, existing_memory);
     if(current->memory == existing_memory){
+      fprintf(stderr, "Pasó\n");
       PointerNode* newNode = createPointerNode(new_pointer);
       newNode->next = current->pointers;
       current->pointers = newNode;
