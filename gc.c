@@ -57,6 +57,7 @@ void registerPointerToMemory(void** new_pointer, void* existing_memory){
     if(current->memory == existing_memory){
       fprintf(stderr, "Pasó\n");
       PointerNode* newNode = createPointerNode(new_pointer);
+      *new_pointer = existing_memory;
       newNode->next = current->pointers;
       current->pointers = newNode;
       return;
